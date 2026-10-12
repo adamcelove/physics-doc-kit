@@ -111,7 +111,10 @@ def test_missing_printfit_prints_install_message_once(tmp_path):
     f = make_printable(tmp_path)
     r = run("printfit-posttool.sh", write(f, PRINTABLE), tmp_path)
     assert r.returncode == 0
-    assert "uv tool install git+https://github.com/adamcelove/printfit" in json.loads(r.stdout)["systemMessage"]
+    out = json.loads(r.stdout)
+    assert "uv tool install git+https://github.com/adamcelove/printfit" in out["systemMessage"]
+    ctx = out["hookSpecificOutput"]["additionalContext"]
+    assert "only after the user approves" in ctx and "astral.sh/uv" in ctx
     again = run("printfit-posttool.sh", write(f, PRINTABLE), tmp_path)
     assert again.returncode == 0 and again.stdout == ""
 

@@ -75,9 +75,13 @@ If `printfit` is missing, the hooks say so once and do nothing else, so the plug
 
 ## Never used a terminal?
 
-You can do your daily work in the Claude desktop app. Open the **Code** tab, click **+** next to the prompt box, choose **Plugins**, then **Add plugin**: the plugin browser lists the plugins from the marketplaces you have added, and **Manage plugins** turns them on and off. Plugins installed this way are not available in cloud sessions.
+You can install and use the kit entirely from the Claude desktop app.
 
-The desktop app's documentation does not describe adding a marketplace from inside the app, so there is a one-time setup outside it: install printfit and add this repository's marketplace with the commands in steps 1 and 2 above, once, from a terminal. A colleague who is comfortable with a terminal can do this in a few minutes. After that, everything else happens in the app.
+1. **Add the marketplace.** In the desktop app, go to **Customize > Plugins > Add > Add marketplace** and enter `adamcelove/physics-doc-kit`.
+2. **Install the plugin.** Open the **Code** tab, click **+** next to the prompt box, choose **Plugins > Add plugin**, and install **physics-doc-kit**. Start a new session so it loads.
+3. **Let Claude install the print gate.** When Claude writes your first worksheet, the kit notices printfit is missing and Claude offers to install it. Each install command appears for you to approve before it runs. Decline and the kit still works, just without the page check.
+
+Plugins installed this way are not available in cloud sessions. The hooks use `jq`, which ships with recent macOS; on older systems, ask Claude to install it.
 
 Verified US K-12 teachers can get Claude, including Claude Code, free through Anthropic's [Claude for Teachers](https://claude.com/solutions/teachers) program. Check that page for current terms.
 
