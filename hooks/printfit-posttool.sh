@@ -13,7 +13,6 @@ command -v jq >/dev/null 2>&1 || exit 0
 
 input=$(cat)
 tool=$(echo "$input" | jq -r '.tool_name // ""')
-TOOLS_DIR="${CLAUDE_PLUGIN_ROOT:-.}/tools"
 
 targets=()
 note=""
@@ -81,7 +80,7 @@ for t in "${targets[@]}"; do
   out=$(printfit check "$t" 2>&1)
   verdict=$(echo "$out" | grep -E 'verdict:' | tail -1 | sed 's/.*verdict: *//')
   toggle=""
-  grep -qE 'key-toggle:v1|edit-mode:v1' "$t" || toggle=" (no answer-key toggle; if it has answers, add it in the builder, or for a hand-authored file run: python3 $TOOLS_DIR/add-key-toggle.py <file>)"
+  grep -qE 'key-toggle:v1|edit-mode:v1' "$t" || toggle=" (no answer-key toggle; if it has answers, add it in the builder, or for a hand-authored file use the add-key-toggle tool in the plugin tools folder, as the worksheet skill describes)"
   if [ -z "$verdict" ]; then
     # printfit crashed or printed nothing parseable: warn, never block on a tool error
     summary+="printfit gave no verdict for $(basename "$t") (tool error, not a layout failure):"$'\n'"$(echo "$out" | tail -5)"$'\n'
