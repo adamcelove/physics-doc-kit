@@ -1,7 +1,7 @@
 {
   "name": "physics-doc-kit",
   "version": "0.1.0",
-  "description": "Author physics worksheets, keys, and labs to a fixed standard, with a deterministic print gate.",
+  "description": "Author physics worksheets, quizzes, and answer keys to a fixed standard, with a deterministic print gate.",
   "author": {
     "name": "adamcelove",
     "url": "https://github.com/adamcelove"
