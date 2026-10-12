@@ -1,0 +1,1 @@
+physics-doc-kit: printfit is not installed, so printable HTML is not being page-checked. Install it with: uv tool install git+https://github.com/adamcelove/printfit, then reopen the session.

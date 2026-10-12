@@ -66,10 +66,11 @@ if ! command -v printfit >/dev/null 2>&1; then
   flag="$state/physics-doc-kit-printfit-missing"
   if [ ! -e "$flag" ]; then
     mkdir -p "$state" 2>/dev/null && : > "$flag" 2>/dev/null
-    msg="physics-doc-kit: printfit is not installed, so printable HTML is not being page-checked. Install it with: uv tool install git+https://github.com/adamcelove/printfit, then reopen the session."
-    # Tell Claude too, so a teacher with no terminal can install by approving each command.
-    ctx="printfit (the physics-doc-kit print gate) is not installed. Offer to install it for the user. Run each command only after the user approves it. 1) If 'uv' is not on PATH, install uv using the official instructions for the user's system at https://docs.astral.sh/uv/getting-started/installation/ (on macOS with Homebrew: brew install uv). 2) uv tool install git+https://github.com/adamcelove/printfit . 3) Confirm with: printfit --help (open a new session if PATH has not updated). Never install anything without approval, and if the user declines, continue without the print check and say so."
-    echo "{\"systemMessage\":$(printf '%s' "$msg" | jq -Rs .),\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":$(printf '%s' "$ctx" | jq -Rs .)}}"
+    # Static text files, so this script never names an installer. The second one
+    # tells Claude to offer the install, one approved command at a time.
+    msgs="$(dirname "$0")/messages"
+    jq -n --rawfile user "$msgs/printfit-missing-user.txt" --rawfile claude "$msgs/printfit-missing-claude.txt" \
+      '{systemMessage: $user, hookSpecificOutput: {hookEventName: "PostToolUse", additionalContext: $claude}}'
   fi
   exit 0
 fi
