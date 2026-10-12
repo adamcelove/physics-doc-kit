@@ -125,7 +125,7 @@ def test_posttool_pass_reports_summary(tmp_path):
     r = run("printfit-posttool.sh", write(f, PRINTABLE), tmp_path, printfit=stub)
     assert r.returncode == 0
     ctx = json.loads(r.stdout)["hookSpecificOutput"]["additionalContext"]
-    assert "printfit pass: ws.html" in ctx and "add-key-toggle.py" in ctx
+    assert "printfit pass: ws.html" in ctx and "add-key-toggle tool" in ctx
 
 
 def test_posttool_fail_exits_2(tmp_path):
