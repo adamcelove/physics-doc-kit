@@ -1,0 +1,12 @@
+# One case-insensitive regex per line. Inline flags such as (?-i:...) override.
+/Users/
+alove
+adamcelove@gmail
+Adam Love
+(?-i:\bLove\b)
+Blackbaud
+OneDrive
+@gmail\.com
+Block [A-G]\b
+Gen Phys [AB]
+Honors [DE]\b

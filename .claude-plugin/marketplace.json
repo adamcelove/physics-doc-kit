@@ -1,0 +1,12 @@
+{
+  "name": "physics-doc-kit",
+  "description": "Physics worksheet authoring standards, skills, and a print gate for Claude Code.",
+  "owner": { "name": "adamcelove", "url": "https://github.com/adamcelove" },
+  "plugins": [
+    {
+      "name": "physics-doc-kit",
+      "source": "./",
+      "description": "Author physics worksheets, keys, and labs to a fixed standard, with a deterministic print gate."
+    }
+  ]
+}

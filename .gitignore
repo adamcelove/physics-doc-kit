@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.venv/
+out/
+*.bak
+.DS_Store
+.pytest_cache/
+docs/plans/
+docs/archive/

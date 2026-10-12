@@ -1,0 +1,36 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      # Set the repository variable PRINTFIT_GIT to a pinned install URL, for example
+      # git+https://github.com/adamcelove/printfit@<commit-sha>. Unset: the printfit steps are skipped.
+      PRINTFIT_GIT: ${{ vars.PRINTFIT_GIT }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - uses: browser-actions/setup-chrome@v1
+        id: chrome
+      - name: Tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq jq
+      - name: Scrub check
+        run: uv run python scripts/scrub-check.py
+      - name: Install printfit
+        if: env.PRINTFIT_GIT != ''
+        run: uv tool install "$PRINTFIT_GIT"
+      - name: Tests
+        env:
+          PRINTFIT_CHROME: ${{ steps.chrome.outputs.chrome-path }}
+        run: uv run pytest -q
+      - name: Print check on the example (blank state)
+        if: env.PRINTFIT_GIT != ''
+        env:
+          PRINTFIT_CHROME: ${{ steps.chrome.outputs.chrome-path }}
+        run: printfit check examples/horizontal-launch/worksheet.html --out "$RUNNER_TEMP/pf"
