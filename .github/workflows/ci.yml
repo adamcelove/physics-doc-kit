@@ -11,6 +11,8 @@ jobs:
       # Set the repository variable PRINTFIT_GIT to a pinned install URL, for example
       # git+https://github.com/adamcelove/printfit@<commit-sha>. Unset: the printfit steps are skipped.
       PRINTFIT_GIT: ${{ vars.PRINTFIT_GIT }}
+      # Ubuntu 24.04 runners cannot start Chrome's sandbox; printfit's CI-only opt-in.
+      PRINTFIT_NO_SANDBOX: "1"
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
