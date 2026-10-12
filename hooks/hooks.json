@@ -4,13 +4,13 @@
       {
         "matcher": "Write|Edit|MultiEdit",
         "hooks": [
-          { "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/mathml-pretool.sh\"" }
+          { "type": "command", "command": "${CLAUDE_PLUGIN_ROOT}/hooks/mathml-pretool.sh" }
         ]
       },
       {
         "matcher": "Bash",
         "hooks": [
-          { "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/printfit-key-guard.sh\"" }
+          { "type": "command", "command": "${CLAUDE_PLUGIN_ROOT}/hooks/printfit-key-guard.sh" }
         ]
       }
     ],
@@ -18,7 +18,7 @@
       {
         "matcher": "Edit|Write|MultiEdit|Bash",
         "hooks": [
-          { "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/printfit-posttool.sh\"" }
+          { "type": "command", "command": "${CLAUDE_PLUGIN_ROOT}/hooks/printfit-posttool.sh" }
         ]
       }
     ]
